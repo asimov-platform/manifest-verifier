@@ -20,7 +20,9 @@ fn on_error(path: &str, rule: &Rule) {
     // Format: "::error file={name},col={col},endColumn={endColumn},line={line},endLine={endLine},title={title}::{message}"
     // Example: "::error file=app.js,line=1,col=5,endColumn=7,title=YOUR-TITLE::Missing semicolon"
 
-    let message = rule.message.as_ref().map(|m| urlencoding::encode(m));
+    let urlencode = |s: &str| s.replace('\n', "%0A");
+
+    let message = rule.message.as_ref().map(|m| urlencode(m));
     let parts = vec![
         Some(format!("file={}", path)),
         rule.location.as_ref().map(|l| format!("col={}", l.column)),
@@ -35,7 +37,7 @@ fn on_error(path: &str, rule: &Rule) {
             .map(|l| format!("endLine={}", l)),
         rule.title
             .as_ref()
-            .map(|t| format!("title={}", urlencoding::encode(t))),
+            .map(|t| format!("title={}", urlencode(t))),
     ];
 
     let args = parts.into_iter().flatten().collect::<Vec<_>>().join(",");
