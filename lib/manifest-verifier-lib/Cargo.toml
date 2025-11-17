@@ -1,0 +1,7 @@
+[package]
+name = "manifest-verifier-lib"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+marked-yaml.workspace = true

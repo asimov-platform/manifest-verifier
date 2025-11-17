@@ -1,0 +1,13 @@
+[package]
+name = "manifest-verifier"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+manifest-verifier-lib = { path = "../manifest-verifier-lib" }
+marked-yaml.workspace = true
+clap = { version = "4.5", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+thiserror = "2.0"
+indoc = "2.0"
+urlencoding = "2.1"

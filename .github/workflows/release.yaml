@@ -1,0 +1,31 @@
+# See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+---
+name: Release
+
+# Trigger on any tag creation:
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build-and-release:
+    name: Build and release
+    uses: asimov-platform/actions/.github/workflows/build-and-release-rust-package.yaml@master
+    permissions:
+      contents: read
+      packages: write
+    secrets: inherit
+    with:
+      create_release: true
+      update_homebrew_tap: false
+      update_scoop_bucket: false
+      update_crates_io: false
+      rust_toolchain: 1.89.0
+      build-linux-x86-gnu: true
+      build-linux-x86-musl: false
+      build-linux-arm-gnu: false
+      build-linux-arm-musl: false
+      build-macos-x86: false
+      build-macos-arm: false
+      build-windows: false

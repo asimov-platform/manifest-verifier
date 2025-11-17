@@ -1,0 +1,11 @@
+[workspace]
+name = "manifest-verifier"
+resolver = "3"
+members = ["lib/manifest-verifier-lib", "lib/manifest-verifier"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+
+[workspace.dependencies]
+marked-yaml = { version = "0.8", features = ["serde-path"] }
